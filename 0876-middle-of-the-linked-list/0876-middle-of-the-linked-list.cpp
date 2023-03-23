@@ -20,22 +20,46 @@ public:
             cnt++;
             temp = temp->next;
         }
-        // cout << cnt;
         return cnt;
     }
+//     ListNode* middleNode(ListNode* head) {
+//         if(head==NULL){
+//             return head;
+//         }
+//         int l = length(head);
+//         int middle = l/2;
+        
+//         ListNode* temp = head;
+//         int i=1;
+//         while(i<=middle){
+//             i++;
+//             temp = temp->next;
+//         }
+//         return temp;
+//     }
+    
     ListNode* middleNode(ListNode* head) {
-        int l = length(head);
-        int middle = l/2;
-        // cout << middle;
-        if(l==0){
+        if(head==NULL){
             return NULL;
         }
-        ListNode* temp = head;
-        int i=1;
-        while(i<=middle){
-            i++;
-            temp = temp->next;
+        if(head->next==NULL){
+            return head;
         }
-        return temp;
+        if(head->next->next==NULL){
+            return head->next;
+        }
+        
+        ListNode* fast = head->next;
+        ListNode* slow = head;
+        
+        while(fast!=NULL){
+            if(fast->next){
+                fast = fast->next;
+            }
+            fast = fast->next;
+            slow=slow->next;
+        }
+        
+        return slow;
     }
 };

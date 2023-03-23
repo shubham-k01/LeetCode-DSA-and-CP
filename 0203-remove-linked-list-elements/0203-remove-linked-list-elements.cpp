@@ -10,14 +10,45 @@
  */
 class Solution {
 public:
+    // ListNode* removeElements(ListNode* head, int val) {
+    //     if(head==NULL){
+    //         return NULL;
+    //     }
+    //     if(head->val==val){
+    //         return removeElements(head->next,val);
+    //     }
+    //     head->next = removeElements(head->next,val);
+    //     return head;
+    // }
+    
     ListNode* removeElements(ListNode* head, int val) {
         if(head==NULL){
             return NULL;
         }
-        if(head->val==val){
-            return removeElements(head->next,val);
+        ListNode* curr = head;
+        ListNode* prev = NULL;
+        while(curr!=NULL){
+            if(curr->val==val){
+                if(prev==NULL){
+                    prev = curr;
+                    curr = curr->next;
+                    delete prev;
+                    prev=NULL;
+                    head = curr;
+                }
+                else{
+                    prev->next=curr->next;
+                    delete curr;
+                    curr = prev->next;
+                }
+            }
+            else{
+                prev = curr;
+                curr = curr->next;
+            }
         }
-        head->next = removeElements(head->next,val);
         return head;
     }
+    
+    
 };

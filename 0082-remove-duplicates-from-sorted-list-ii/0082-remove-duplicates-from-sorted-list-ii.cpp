@@ -25,15 +25,15 @@ public:
                 int cnt = mp[temp->val];
                 while(cnt>0){
                     if(prev==NULL){
-                        prev = temp;
+                        // prev = temp;
                         temp = temp->next;
-                        delete prev;
-                        prev = NULL;
+                        // delete prev;
+                        // prev = NULL;
                         head = temp;
                     }
                     else{
                         prev->next = temp->next;
-                        delete temp;
+                        // delete temp;
                         temp = prev->next;
                     }
                     cnt--;

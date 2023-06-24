@@ -34,17 +34,25 @@ class Solution{
        for(int i=0;i<n;i++){
            balance += p[i].petrol - p[i].distance;
            if(balance < 0){
-              deficit += balance; 
+            //   deficit += balance; 
                start = i+1;
                balance = 0;
             }
        }
-      if(deficit + balance >=0){
-          return start;
-      }
-      else{
-            return -1;
-      }
+       int i;
+       for(i = 0;i<start;i++){
+           balance += p[i].petrol - p[i].distance;
+           if(balance<0){
+               return -1;
+           }
+       }
+       return start;
+    //   if(deficit + balance >=0){
+    //       return start;
+    //   }
+    //   else{
+    //         return -1;
+    //   }
     
        
        

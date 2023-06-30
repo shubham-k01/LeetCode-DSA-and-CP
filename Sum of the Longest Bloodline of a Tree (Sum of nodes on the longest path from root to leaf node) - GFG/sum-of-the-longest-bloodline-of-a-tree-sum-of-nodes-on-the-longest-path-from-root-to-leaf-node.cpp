@@ -118,71 +118,73 @@ class Solution
 {
 public:
     
-    // void solve(Node* root,pair<int,int> ans,pair<int,int> &maxi){
-    //     if(root==NULL){
-    //         if(ans.first > maxi.first ){
-    //             maxi.second = ans.second;
-    //             maxi.first = ans.first;
-    //         }
-    //         else if(ans.first == maxi.first){
-    //             ans.second = max(ans.second,maxi.second);
-    //         }
-    //         return;
-    //     }
-        
-        
-    //     ans.second += root->data;
-    //     ans.first++;
-        
-    //     solve(root->left,ans,maxi);
-    //     solve(root->right,ans,maxi);
-        
-        
-    // }
-    
-    // int sumOfLongRootToLeafPath(Node *root)
-    // {
-    //     //code here
-    //     pair<int,int> ans = make_pair(0,0);
-    //     pair<int,int> maxi = make_pair(0,0);
-    //     solve(root,ans,maxi);
-    //     return maxi.second;
-    // }
-    void solve(Node* root, int sum, int &maxSum, int len, int &maxLen) {
-        //base case
-        if( root == NULL ) {
-            
-            if(len > maxLen) 
-            {
-                maxLen = len;
-                maxSum = sum;
+    void solve(Node* root,pair<int,int> ans,pair<int,int> &maxi){
+        if(root== NULL){
+            if(ans.first > maxi.first ){
+                maxi.first = ans.first;
+                maxi.second = ans.second;
             }
-            else if(len == maxLen) 
-            {
-                maxSum = max(sum, maxSum);
+            else if(ans.first == maxi.first){
+                // cout << maxi.first << endl;
+                maxi.second = max(ans.second,maxi.second);
             }
             return;
         }
         
-        sum = sum + root->data;
         
-        solve(root->left, sum, maxSum, len+1, maxLen);
-        solve(root->right, sum, maxSum, len+1, maxLen);
-
+        ans.second += root->data;
+        ans.first++;
+        
+        solve(root->left,ans,maxi);
+        solve(root->right,ans,maxi);
+        
+        
     }
     
     int sumOfLongRootToLeafPath(Node *root)
     {
-        int len = 0;
-        int maxLen = 0;
-        
-        int sum = 0;
-        int maxSum = INT_MIN;
-        
-        solve(root, sum, maxSum, len, maxLen);
-        
-        return maxSum;
+        //code here
+        pair<int,int> ans = make_pair(0,0);
+        pair<int,int> maxi = make_pair(0,0);
+        solve(root,ans,maxi);
+        return maxi.second;
     }
+    
+    // void solve(Node* root, int sum, int &maxSum, int len, int &maxLen) {
+    //     //base case
+    //     if( root == NULL ) {
+            
+    //         if(len > maxLen) 
+    //         {
+    //             maxLen = len;
+    //             maxSum = sum;
+    //         }
+    //         else if(len == maxLen) 
+    //         {
+    //             maxSum = max(sum, maxSum);
+    //         }
+    //         return;
+    //     }
+        
+    //     sum = sum + root->data;
+        
+    //     solve(root->left, sum, maxSum, len+1, maxLen);
+    //     solve(root->right, sum, maxSum, len+1, maxLen);
+
+    // }
+    
+    // int sumOfLongRootToLeafPath(Node *root)
+    // {
+    //     int len = 0;
+    //     int maxLen = 0;
+        
+    //     int sum = 0;
+    //     int maxSum = INT_MIN;
+        
+    //     solve(root, sum, maxSum, len, maxLen);
+        
+    //     return maxSum;
+    // }
     
 };
 

@@ -108,12 +108,12 @@ class Solution {
             return true;
         }
         
-        if(index >= cnt){
+        if(index > cnt){
             return false;
         }
         else{
-            bool left = isCBT(root->left,2*index + 1,cnt);
-            bool right = isCBT(root->right,2*index + 2,cnt);
+            bool left = isCBT(root->left,2*index ,cnt);
+            bool right = isCBT(root->right,2*index + 1,cnt);
             return (left && right);
         }
     }
@@ -147,7 +147,7 @@ class Solution {
             return true;
         }
         
-        if(isCBT(tree,0,countNodes(tree)) && maxOrder(tree)){
+        if(isCBT(tree,1,countNodes(tree)) && maxOrder(tree)){
             return true;
         }
         return false;

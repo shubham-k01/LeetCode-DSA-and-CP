@@ -55,7 +55,6 @@ public:
         
         
         for(int i = 2;i<n;i++){
-            
             dp[i] = cost[i] + min(dp[i-1],dp[i-2]);
         }
         return min(dp[n-1],dp[n-2]);
@@ -86,8 +85,8 @@ public:
         vector<int> dp(n+1,-1);
         // return min(solve1(cost,n-1,dp),solve1(cost,n-2,dp));
         // return min(solve1(cost,0,dp),solve1(cost,1,dp));
-        // return solve2(cost,n);
-        return solve3(cost,n);
+        return solve2(cost,n);
+        // return solve3(cost,n);
     }
     
 };

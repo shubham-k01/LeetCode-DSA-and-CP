@@ -27,9 +27,6 @@ class Solution{
 	    if(n == 0){
 	        return 0;
 	    }
-	    if(n == 1){
-	        return 1;
-	    }
 	    
 	    if(dp[n] != -1){
 	        return dp[n];
@@ -44,14 +41,30 @@ class Solution{
 	    return ans;
 	}
 	
-	
+	int solveTab(int n){
+	    
+	    vector<int> dp(n+1,INT_MAX);
+	    dp[0] = 0;
+	    
+	    for(int i=1; i<=n; i++){
+	        for(int j=1; j*j<=i; j++){
+	            if(i-(j*j)>=0){
+	                dp[i] = min(dp[i],dp[i-(j*j)] + 1);
+	            }
+	        }
+	    }
+	    
+	    return dp[n];
+	}
 	
 	int MinSquares(int n)
 	{
 	   // return solve(n);
 	   
-	   vector<int> dp(n+1,-1);
-	   return solveMem(n,dp);
+	   //vector<int> dp(n+1,-1);
+	   //return solveMem(n,dp);\
+	   
+	   return solveTab(n);
 	}
 };
 

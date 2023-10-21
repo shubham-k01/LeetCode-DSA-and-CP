@@ -1,5 +1,5 @@
 /* Write your T-SQL query statement below */
-SELECT s.student_id, s.student_name, sb.subject_name, COUNT(e.student_id) as attended_exams 
+SELECT s.student_id, s.student_name, sb.subject_name, COUNT(e.subject_name) as attended_exams 
 FROM Students s 
 CROSS JOIN Subjects sb
 LEFT JOIN Examinations e

@@ -66,11 +66,11 @@ public:
                 if(obstacles[currpos+1] != currlane){
                     dp[currlane][currpos] =  dp[currlane][currpos+1];
                 }
-
                 else{
                     int ans = 1e9;
                     for(int k = 1; k<=3; k++){
                         if(currlane != k  && obstacles[currpos] != k){
+//                             here currpos+1 is done because if currpos has some obstacle then it won't be updated and it will be having the value of 1e9  
                             ans = min(ans, 1 + dp[k][currpos+1]);
                         }
                     }  

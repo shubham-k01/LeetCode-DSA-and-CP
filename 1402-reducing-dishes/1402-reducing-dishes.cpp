@@ -28,13 +28,31 @@ public:
         return dp[index][time];
     }
     
+    int solveTab(vector<int>& satisfaction,int n){
+        
+        vector<vector<int>> dp(n+1,vector<int> (n+1,0));
+        for(int currIndex = n-1; currIndex >=0 ; currIndex--){
+//             start currTime from currIndex because the currIndex will be the total time for that index
+            for(int currTime = currIndex; currTime >= 0; currTime--){
+                int include = satisfaction[currIndex] * (currTime+1) + dp[currIndex+1][currTime+1];
+                int exclude = 0 + dp[currIndex+1][currTime];
+
+                dp[currIndex][currTime] = max(include,exclude);
+            }
+        }
+        
+        return dp[0][0];
+    }
+    
     int maxSatisfaction(vector<int>& satisfaction) {
         
         int n = satisfaction.size();
         sort(satisfaction.begin(),satisfaction.end());
         // return solve(satisfaction,n,0,1);
         
-        vector<vector<int>> dp(n+1,vector<int> (n+1,-1));
-        return solveMem(satisfaction,n,0,1,dp);
+        // vector<vector<int>> dp(n+1,vector<int> (n+1,-1));
+        // return solveMem(satisfaction,n,0,1,dp);
+        
+        return solveTab(satisfaction,n);
     }
 };

@@ -57,8 +57,44 @@ public:
         int two = dp2[n/3][1];
         
         return max(one,two);
+          
+    }
+    
+    int solveSpOp(vector<int> &slices){
+       
+        int n = slices.size();
+        vector<int> prev1(n+2,0);
+        vector<int> curr1(n+2,0);
         
+        for(int k = 1; k <= n/3; k++){
+            for(int index = n-2; index >=0; index--){
+                int case1 = slices[index] + prev1[index+2];
+                int case2 = 0 + curr1[index+1];
+                
+                curr1[index] = max(case1,case2);
+            }
+            prev1 = curr1;
+        }
         
+        int one = curr1[0];
+        
+        vector<int> prev2(n+2 + 1,0);
+        vector<int> curr2(n+2 +1,0);
+         
+        for(int k = 1; k <= n/3; k++){
+            for(int index = n-1; index >=1; index--){
+                int case1 = slices[index] + prev2[index+2];
+                int case2 = 0 + curr2[index+1];
+                
+                curr2[index] = max(case1,case2);
+            }
+            prev2 = curr2;
+        }
+        
+        int two = curr2[1];
+        
+        return max(one,two);
+          
     }
     
     int maxSizeSlices(vector<int>& slices) {
@@ -77,6 +113,9 @@ public:
         // int case2 = solveMem(slices,n-1,n/3,1,dp2);
         // return max(case1,case2);
         
-        return solveTab(slices);
+        // return solveTab(slices);
+        
+        return solveSpOp(slices);
+        
     }
 };

@@ -68,11 +68,36 @@ public:
         return dp[n][target];
     }
     
+    int solveSpOp(int n,int k, int target){
+        
+        vector<int> curr(target+1,0);
+        vector<int> prev(target+1,0);
+        prev[0] = 1;
+        
+        for(int dice = 1; dice <= n; dice++){
+            for(int tar = 1; tar <=target; tar++){
+                long long ans = 0;
+                for(int i = 1; i<=k; i++){
+                    if(tar-i >= 0){
+                        ans = ans + prev[tar-i];
+                    }   
+                }
+                curr[tar] = ans%MOD;
+            }
+            prev = curr;
+        }
+        
+        return curr[target];
+        
+    }
+    
     int numRollsToTarget(int n, int k, int target) {
         // return solve(n,k,target);
         
         // vector<vector<long long>> dp(n+1,vector<long long> (target+1,-1));
         // return solveMem(n,k,target,dp);
+        
+        // return solveTab(n,k,target);
         
         return solveTab(n,k,target);
     }
